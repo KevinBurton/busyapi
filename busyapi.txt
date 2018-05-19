@@ -1,0 +1,21 @@
+Remove console log
+Made the method asynchronous
+module.exports = function(app){
+    app.post('/api/usages', async (req, res, next) => {
+
+        try {
+            // Store the supplied usage data
+            await app.usages.push(req.body);
+
+            var usageId = await app.usages.length;
+            // console.log('Stored usage count: ' + usageId);
+            res.status(201).json({'id':usageId});
+        } catch(e) {
+            next(e)
+        }
+    });
+}
+Made a Postman collection to easily exercise the Postman
+Built a C# console app to make an number of simultaneous calls
+Tried pulling out the push and that doesn't seem to be the bottleneck.
+Generated a PowerShell script to invoke the request
